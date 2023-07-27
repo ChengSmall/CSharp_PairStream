@@ -1,0 +1,2102 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PairToByteData</name>
+    </assembly>
+    <members>
+        <member name="T:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream`1">
+            <summary>
+            <para>字节流转化器</para>
+            <para>可以将指定对象转化为字节流的方法，使用该接口实现自定义数据存储</para>
+            <para>若遇到对象无法直接实例化，请使用<see cref="T:Cheng.Stream.PairToByteStreams.DataOirgnal.IReferenceTypeToByteStream`1"/>接口</para>
+            </summary>
+            <typeparam name="Obj">转化的对象类型</typeparam>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream`1.ToObj(System.Byte[])">
+            <summary>
+            将字节流转化为对象
+            </summary>
+            <param name="byteStream">要转化的字节流数据</param>
+            <returns>转化的对象</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream`1.ToByteStream(`0)">
+            <summary>
+            将对象转化为字节流的方法
+            </summary>
+            <param name="obj">需要转化的对象</param>
+            <returns>转化后的字节流数据</returns>
+            <exception cref="T:System.ArgumentNullException">返回了一个null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">返回的数据长度超过<see cref="F:System.Int32.MaxValue"/></exception>
+        </member>
+        <member name="T:Cheng.Stream.PairToByteStreams.DataOirgnal.IReferenceTypeToByteStream`1">
+            <summary>
+            字节流转化器，转化引用的类型对象
+            <para>该接口用于无法直接实例化的对象类型</para>
+            </summary>
+            <typeparam name="Obj">指定类型</typeparam>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.IReferenceTypeToByteStream`1.ToObj(System.Byte[],`0@)">
+            <summary>
+            将转化好的字节流写入对象
+            </summary>
+            <param name="byteStream">要写入对象的字节流数据</param>
+            <param name="obj">待写入的对象</param>
+        </member>
+        <member name="T:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream">
+            <summary>
+            公用类型接口字节流转化器
+            <para>可以将派生对象转化为字节流的方法，使用该接口实现自定义数据存储</para>
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream.ToByteStream">
+            <summary>
+            将派生对象转化为字节流的方法
+            </summary>
+            <returns>转化后的字节流数据</returns>
+            <exception cref="T:System.ArgumentNullException">返回了一个null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">返回的数据长度超过<see cref="F:System.Int32.MaxValue"/></exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream.ToObj(System.Byte[])">
+            <summary>
+            将字节流写入到该派生对象
+            <para>该函数通过<paramref name="byteStream"/>参数修改已有数据</para>
+            </summary>
+            <param name="byteStream">要写入的字节流数据</param>
+        </member>
+        <member name="T:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas">
+            <summary>
+            数据管理方法
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToStruckData(System.Byte[],System.IntPtr,System.UInt32,System.UInt32)">
+            <summary>
+            <para>将字节数据转化为指定地址内存，自定义字节数据开始位置和长度</para>
+            <para>写入的数据下标区间[begin,end)</para>
+            </summary>
+            <param name="bys">字节流</param>
+            <param name="address">写入的内存起始地址</param>
+            <param name="begin">字节数组要写入的起始下标</param>
+            <param name="count">要写入字节数据的大小</param>
+            <exception cref="T:System.ArgumentNullException">字节数组为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToStruckData(System.Byte[],System.IntPtr,System.UInt32)">
+            <summary>
+            <para>将字节数据转化为指定地址的内存；规定转化字节长度</para>
+            <para>将从字节数据的初始位置开始写入，<paramref name="size"/>个长度后停止；如果规定长度超过数组长度，则会在字节数据写完后停止</para>
+            </summary>
+            <param name="bys">字节流</param>
+            <param name="address">需要写入内存的起始位置</param>
+            <param name="size">想要写入的字节流长度</param>
+            <exception cref="T:System.ArgumentNullException">字节数组为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToStruckData(System.Byte[],System.IntPtr)">
+            <summary>
+            <para>将字节流的值复制到指定地址下的内存</para>
+            <para>地址<paramref name="address"/>开辟的空间至少等于字节数据内的长度</para>
+            </summary>
+            <param name="bys">字节流</param>
+            <param name="address">转化后存储的位置，该位置必须是可用的内存</param>
+            <exception cref="T:System.ArgumentNullException">字节数组为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToStrByteArray(System.IntPtr,System.UInt32)">
+            <summary>
+            <para>数据内存转化为字节流</para>
+            </summary>
+            <param name="address">数据内存地址</param>
+            <param name="size">数据内存子节大小</param>
+            <returns>字节流</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteArray(System.Boolean)">
+            <summary>
+            布尔类型转字节流
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteArray(System.Int32)">
+            <summary>
+            将整型值转化为字节流
+            </summary>
+            <returns>整型值所表示的字节流</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteArray(System.Int64)">
+            <summary>
+            将长整形转化为字节流
+            </summary>
+            <returns>表示该值的字节流</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteArray(System.Single)">
+            <summary>
+            将单浮点值转化为字节流表示
+            </summary>
+            <returns>表示该浮点值的字节流</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteArray(System.Double)">
+            <summary>
+            将双浮点值转化为字节流表示
+            </summary>
+            <returns>表示该双浮点值的字节流</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteArray(System.Int16)">
+            <summary>
+            将短整型转化为字节流
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteArray(System.Char)">
+            <summary>
+            将字符转化为字节流
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteArray(System.Decimal)">
+            <summary>
+            十进制转字节流
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToShort(System.Byte[])">
+            <summary>
+            字节流转化短整型
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToShort(System.Byte[],System.Int32)">
+            <summary>
+            字节流转化短整型
+            </summary>
+            <param name="bys"></param>
+            <param name="begin">起始下标</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToBool(System.Byte[])">
+            <summary>
+            字节流转布尔值
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToBool(System.Byte[],System.Int32)">
+            <summary>
+            字节流转布尔值
+            </summary>
+            <param name="bys">字节流</param>
+            <param name="index">指定转换下标</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToInt32(System.Byte[])">
+            <summary>
+            <para>字节流转32位整形数组</para>
+            <para>从数组起始下标开始转化</para>
+            </summary>
+            <param name="bys">字节流</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToInt32(System.Byte[],System.Int32)">
+            <summary>
+            <para>从指定下标开始转化32位整型值</para>
+            </summary>
+            <param name="begin">起始下标</param>
+            <param name="bys">字节流</param>
+            <returns>从起始下标向后延伸4个长度的数据转化的整数</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToInt64(System.Byte[])">
+            <summary>
+            <para>字节流转64位整形数组</para>
+            <para>从数组起始下标开始转化</para>
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToInt64(System.Byte[],System.Int32)">
+            <summary>
+            <para>从指定下标开始转化64位整型值</para>
+            </summary>
+            <param name="begin">起始下标</param>
+            <param name="bys">字节流</param>
+            <returns>从起始下标向后延伸8个长度的数据转化的整数</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToFloat(System.Byte[])">
+            <summary>
+            字节流转浮点值，从数组起始开始
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToFloat(System.Byte[],System.Int32)">
+            <summary>
+            从指定位置转化浮点值
+            </summary>
+            <param name="begin">起始位置</param>
+            <param name="bys">字节流</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToDouble(System.Byte[])">
+            <summary>
+            字节流转化双精度浮点值
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToDouble(System.Byte[],System.Int32)">
+            <summary>
+            指定字节流起始位置转化双精度浮点值
+            </summary>
+            <param name="bys">字节流</param>
+            <param name="begin">字节数组起始下标</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToDecimal(System.Byte[])">
+            <summary>
+            字节流转化为十进制数
+            </summary>
+            <returns>字节数组在内存当中转化</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToCharData(System.Byte[])">
+            <summary>
+            字节流转化字符
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteData(System.String)">
+            <summary>
+            字符串转化字节流储存
+            </summary>
+            <returns>转化后的字节流</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToStringByData(System.Byte[])">
+            <summary>
+            将字节流转化为字符串
+            </summary>
+            <returns>字节流数据表示的字符串</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteArray``1(``0)">
+            <summary>
+            将非托管类型转化为字节流
+            </summary>
+            <typeparam name="T">非托管类型</typeparam>
+            <param name="obj">要转化的对象</param>
+            <returns>转化后的字节数组</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToStruct``1(System.Byte[])">
+            <summary>
+            将字节数组转化为非托管类型
+            </summary>
+            <typeparam name="T">非托管类型</typeparam>
+            <param name="bys">要转化的数组</param>
+            <returns>转化后的对象</returns>
+            <exception cref="T:System.ArgumentException">类型大小超过和字节数组</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.WriteByteArray``1(System.Byte[],``0,System.Int32)">
+            <summary>
+            将非托管类型写入字节数组，指定写入的起始索引
+            </summary>
+            <typeparam name="T">非托管类型</typeparam>
+            <param name="obj">要写入的数据</param>
+            <param name="bys">被写入的字节数组</param>
+            <param name="index">被写入的字节数组，从该索引开始写入</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">类型大小超过数组写入长度</exception>
+            <exception cref="T:System.ArgumentNullException">字节数组为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.WriteByteArray``1(System.Byte[],``0)">
+            <summary>
+            将非托管类型写入字节数组
+            </summary>
+            <typeparam name="T">非托管类型</typeparam>
+            <param name="obj">要写入的数据</param>
+            <param name="bys">被写入的字节数组</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">类型大小超过数组写入长度</exception>
+            <exception cref="T:System.ArgumentNullException">字节数组为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToStruct``1(System.Collections.Generic.IList{System.Byte},System.Int32)">
+            <summary>
+            将指定byte集合中的一段字节数据转化为指定类型对象
+            </summary>
+            <typeparam name="Value">转化类型</typeparam>
+            <param name="bys">集合</param>
+            <param name="index">集合转化的字节数据起始索引</param>
+            <returns>转化后的集合</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">转化的集合长度不足</exception>
+            <exception cref="T:System.ArgumentException">指定类型<typeparamref name="Value"/>不是一个可以转化为连续内存块的类型，无法获取类型大小</exception>
+            <exception cref="T:System.OutOfMemoryException">在转化对象时没有足够的内存储存临时对象内存</exception>
+            <exception cref="T:System.MissingMethodException">类型<typeparamref name="Value"/>没有公开的默认构造函数</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToStruct``1(System.Byte[],System.Int32)">
+            <summary>
+            将指定byte集合中的一段字节数据转化为指定类型对象
+            </summary>
+            <typeparam name="Value">转化类型</typeparam>
+            <param name="bys">集合</param>
+            <param name="index">集合转化的字节数据起始索引</param>
+            <returns>转化后的集合</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">转化的集合长度不足</exception>
+            <exception cref="T:System.ArgumentNullException">字节数组不可为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToRefValue``1(System.IntPtr)">
+            <summary>
+            将指定非托管内存的地址转化为指定非托管对象引用
+            </summary>
+            <typeparam name="Ref">转化的类型</typeparam>
+            <param name="address">将要转化内存地址</param>
+            <returns>对内存<paramref name="address"/>的<typeparamref name="Ref"/>类型的引用</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.WriteByteArray``1(System.Collections.Generic.IList{System.Byte},``0,System.Int32)">
+            <summary>
+            将非托管类型写入字节集合，指定写入的起始索引
+            </summary>
+            <typeparam name="T">非托管类型</typeparam>
+            <param name="obj">要写入的数据</param>
+            <param name="bys">被写入的字节集合</param>
+            <param name="index">被写入的字节集合，从该索引开始写入</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">类型大小超过数组写入长度</exception>
+            <exception cref="T:System.ArgumentNullException">字节数组为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.WriteByteArray``1(System.Collections.Generic.IList{System.Byte},``0)">
+            <summary>
+            将非托管类型写入字节集合
+            </summary>
+            <typeparam name="T">非托管类型</typeparam>
+            <param name="obj">要写入的数据</param>
+            <param name="bys">被写入的字节集合</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">类型大小超过数组写入长度</exception>
+            <exception cref="T:System.ArgumentNullException">字节数组为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.MemoryCopy(System.IntPtr,System.IntPtr,System.UInt32)">
+            <summary>
+            将内存块拷贝到另一个内存块当中；此API不兼容CLS
+            </summary>
+            <param name="copyAddress">需要拷贝的内存首地址</param>
+            <param name="toAddress">考拷贝到的内存首地址</param>
+            <param name="size">内存块字节大小</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.MemorySwap(System.IntPtr,System.IntPtr,System.UInt16)">
+            <summary>
+            将两个内存块内的数据交换；此API不兼容CLS
+            </summary>
+            <param name="address1">内存1</param>
+            <param name="address2">内存2</param>
+            <param name="size">内存块大小</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToBool(System.Byte)">
+            <summary>
+            将单字节值转化为标准布尔值
+            </summary>
+            <param name="byt">值</param>
+            <returns>布尔值</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByte(System.Boolean)">
+            <summary>
+            将布尔值转化为通用整形值
+            </summary>
+            <param name="bol">布尔值</param>
+            <returns>整形值</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ArrCopy``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0},System.Int32,System.Int32)">
+            <summary>
+            将集合内元素拷贝到另一个集合
+            </summary>
+            <param name="copy">被拷贝的集合</param>
+            <param name="to">拷贝到的集合</param>
+            <param name="begin">被拷贝集合的起始位置</param>
+            <param name="size">被拷贝集合的数量</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.LinkArray``1(``0[],``0[])">
+            <summary>
+            <para>连接两个数组为一个新数组</para>
+            <para>若有一方为null值，则直接返回另一方；若两个都为null，返回null</para>
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="arr1">前数组</param>
+            <param name="arr2">后数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.DivisionArray``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32)">
+            <summary>
+            <para>将集合中指定范围的元素存放到新数组中</para>
+            </summary>
+            <typeparam name="T">集合元素类型</typeparam>
+            <param name="list">指定集合</param>
+            <param name="beginIndex">起始下标</param>
+            <param name="count">返回元素个数</param>
+            <returns>指定范围的元素数组</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.DivisionArrayLong``1(``0[],System.Int64,System.Int64)">
+            <summary>
+            <para>将集合中指定范围的元素存放到新数组中</para>
+            </summary>
+            <typeparam name="T">集合元素类型</typeparam>
+            <param name="list">指定集合</param>
+            <param name="beginIndex">起始下标</param>
+            <param name="count">返回元素个数</param>
+            <returns>指定范围的元素数组</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ComparerEquals(System.Byte[],System.Byte[])">
+            <summary>
+            对比两个字节数组中所有元素是否相等
+            </summary>
+            <param name="b1">集合</param>
+            <param name="b2">要对比的集合</param>
+            <returns>如果两个集合每个位置的值都相等，返回true；否则为false</returns>
+            <exception cref="T:System.ArgumentNullException">比较集合为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ComparerEquals``1(``0[],``0[])">
+            <summary>
+            对比两个集合中所有元素是否相等；使用默认比较器
+            </summary>
+            <typeparam name="T">集合元素</typeparam>
+            <param name="t1">集合</param>
+            <param name="t2">要对比的集合</param>
+            <returns>如果两个集合每个位置的元素都相等，返回true；否则为false</returns>
+            <exception cref="T:System.ArgumentNullException">比较集合为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ComparerEquals``1(``0[],``0[],System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            对比两个集合中所有元素是否相等；使用自定义比较器
+            </summary>
+            <typeparam name="T">集合元素</typeparam>
+            <param name="t1">集合</param>
+            <param name="t2">要对比的集合</param>
+            <param name="comparer">比较器</param>
+            <returns>如果两个集合每个位置的元素都相等，返回true；否则为false</returns>
+            <exception cref="T:System.ArgumentNullException">比较集合为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.Comparer``1(``0[],``0[])">
+            <summary>
+            对比两个集合中所有元素是否相等；使用默认比较器接口
+            </summary>
+            <typeparam name="T">集合元素</typeparam>
+            <param name="t1">集合</param>
+            <param name="t2">要对比的集合</param>
+            <returns>如果两个集合每个位置的元素都相等，返回true；否则为false</returns>
+            <exception cref="T:System.ArgumentNullException">比较集合为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ComparerEquals``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0})">
+            <summary>
+            对比两个集合中所有元素是否相等；使用默认比较器
+            </summary>
+            <typeparam name="T">集合元素</typeparam>
+            <param name="t1">集合</param>
+            <param name="t2">要对比的集合</param>
+            <returns>如果两个集合每个位置的元素都相等，返回true；否则为false</returns>
+            <exception cref="T:System.ArgumentNullException">比较集合为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ComparerEquals``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            对比两个集合中所有元素是否相等；使用自定义比较器
+            </summary>
+            <typeparam name="T">集合元素</typeparam>
+            <param name="t1">集合</param>
+            <param name="t2">要对比的集合</param>
+            <param name="comparer">比较器</param>
+            <returns>如果两个集合每个位置的元素都相等，返回true；否则为false</returns>
+            <exception cref="T:System.ArgumentNullException">比较集合为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.Comparer``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0})">
+            <summary>
+            对比两个集合中所有元素是否相等；使用默认比较器接口
+            </summary>
+            <typeparam name="T">集合元素</typeparam>
+            <param name="t1">集合</param>
+            <param name="t2">要对比的集合</param>
+            <returns>如果两个集合每个位置的元素都相等，返回true；否则为false</returns>
+            <exception cref="T:System.ArgumentNullException">比较集合为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ComparerEquals(System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            比较两个内存块的值是否一致
+            </summary>
+            <param name="address1">地址</param>
+            <param name="address2">比较的地址</param>
+            <param name="size">内存块字节大小</param>
+            <returns>若两块指定大小地址内的值一致返回true；否则返回false</returns>
+            <exception cref="T:System.AccessViolationException">可能引发的异常</exception>
+            <exception cref="T:System.NullReferenceException">可能引发的异常</exception>
+        </member>
+        <member name="P:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.LargeEndStorage">
+            <summary>
+            验证当前程序的大小端存储方式
+            </summary>
+            <returns>返回true表示为大端存储，false表示小端存储</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.KeyEquals(System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            比较键值对数据的键和键的数量是否相同
+            </summary>
+            <param name="p1">键值对集合</param>
+            <param name="p2">键值对集合</param>
+            <returns>若两参数的键是相同数量的相等字符串，无论顺序，返回true；否则false</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryNumber``1(``0,System.String)">
+            <summary>
+            获取值类型内存的二进制数据
+            </summary>
+            <typeparam name="Value">类型</typeparam>
+            <param name="value">获取的值</param>
+            <param name="fen">每显示一个byte的分隔符</param>
+            <returns>使用16进制表示的内存数据</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryNumber(System.IntPtr,System.UInt32,System.String)">
+            <summary>
+            获取指定内存的二进制数据
+            </summary>
+            <param name="ptr">内存首地址</param>
+            <param name="size">读取的字节长度</param>
+            <param name="fen">每显示一个byte的分隔符</param>
+            <returns>使用16进制表示的内存数据</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryNumber(System.IntPtr,System.UInt32,System.String,System.String)">
+            <summary>
+            获取指定内存的二进制数据
+            </summary>
+            <param name="ptr">内存首地址</param>
+            <param name="size">读取的字节长度</param>
+            <param name="format">每一个字节值的字符串表现格式</param>
+            <param name="fen">每显示一个byte的分隔符</param>
+            <returns>值的内存数据</returns>
+            <exception cref="T:System.FormatException">值类型字符串输出格式错误</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryNumber``1(``0,System.String,System.String)">
+            <summary>
+            获取指定值的二进制数据
+            </summary>
+            <typeparam name="Value">值类型</typeparam>
+            <param name="value">值</param>
+            <param name="format">值类型的字符串表现格式</param>
+            <param name="fen">每一个byte的分隔符</param>
+            <returns>值的内存数据</returns>
+            <exception cref="T:System.FormatException">字符串输出格式错误</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryNumber(System.IntPtr,System.UInt32,System.Func{System.Byte,System.String},System.String)">
+            <summary>
+            获取指定内存的二进制数据
+            </summary>
+            <param name="ptr">内存首地址</param>
+            <param name="size">读取的字节长度</param>
+            <param name="byteToStringFunc">每一个byte的字符串转化方法</param>
+            <param name="fen">每显示一个byte的分隔符</param>
+            <returns>值的内存数据</returns>
+            <exception cref="T:System.ArgumentNullException">参数为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryNumber``1(``0,System.Func{System.Byte,System.String},System.String)">
+            <summary>
+            获取指定值的二进制数据
+            </summary>
+            <param name="value">值</param>
+            <param name="byteToStringFunc">每一个byte的字符串转化方法</param>
+            <param name="fen">每显示一个byte的分隔符</param>
+            <returns>值的内存数据</returns>
+            <exception cref="T:System.ArgumentNullException">参数为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryWrite(System.IntPtr,System.String)">
+            <summary>
+            将二进制数据写入指定内存
+            </summary>
+            <param name="ptr">写入的地址</param>
+            <param name="binaryStr">字符串表示的二进制数据，其长度要和8对齐，多余的字符将不会写入</param>
+            <exception cref="T:System.FormatException">字符串内有0和1之外的字符</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryWrite``1(System.String,``0@)">
+            <summary>
+            将二进制数据写入指定非托管对象
+            </summary>
+            <typeparam name="Value">非托管类型</typeparam>
+            <param name="binaryStr">字符串表示的二进制数据，其长度要和8对齐，多余的字符将不会写入</param>
+            <param name="value">要写入的对象引用</param>
+            <exception cref="T:System.FormatException">字符串内有0和1之外的字符</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryWrite(System.IntPtr,System.Int32,System.Byte,System.Boolean)">
+            <summary>
+            写入指定地址的指定位域偏移
+            </summary>
+            <param name="ptr">地址</param>
+            <param name="byteBit">地址字节偏移</param>
+            <param name="bit"><paramref name="byteBit"/>偏移下的位域位值，从0-7对应一个byte下的二进制bit位</param>
+            <param name="value">该位值的布尔值表达形式，true表示1，false表示0</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryRead(System.IntPtr,System.Int32,System.Byte)">
+            <summary>
+            读取指定地址的指定位域偏
+            </summary>
+            <param name="ptr">地址</param>
+            <param name="byteBit">读取的地址字节偏移</param>
+            <param name="bit"><paramref name="byteBit"/>偏移下的位域位置，从0-7对应一个byte下的二进制bit位</param>
+            <returns>该位下的位域值，true表示1，false表示0</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">指定位域范围超过byte位数</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryWrite``1(``0@,System.Int32,System.Byte,System.Boolean)">
+            <summary>
+            写入指定值的位域
+            </summary>
+            <typeparam name="Value">非托管类型</typeparam>
+            <param name="obj">值</param>
+            <param name="byteBit">值的字节偏移</param>
+            <param name="bit"><paramref name="byteBit"/>偏移下的位域位置，从0-7对应一个byte下的二进制bit位</param>
+            <param name="value">该位下写入的位域值，true表示1，false表示0</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryRead``1(``0@,System.Int32,System.Byte)">
+            <summary>
+            读取指定值类型的位域
+            </summary>
+            <typeparam name="Value">非托管类型</typeparam>
+            <param name="obj">值</param>
+            <param name="byteBit">字节偏移</param>
+            <param name="bit"><paramref name="byteBit"/>偏移下的位域位置，从0-7对应一个byte下的二进制bit位</param>
+            <returns>该位下的位域值，true表示1，false表示0</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">指定位域范围超过byte位数</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryWrite(System.Array,System.Int32,System.Byte,System.Boolean)">
+            <summary>
+            读取指定基元数组中的内存位域
+            </summary>
+            <param name="array">基元数组基类</param>
+            <param name="byteBit">从索引0开始向后的字节偏移</param>
+            <param name="bit"><paramref name="byteBit"/>偏移下的位域位置，从0-7对应一个byte下的二进制bit位</param>
+            <param name="value">该位下写入的位域值，true表示1，false表示0</param>
+            <exception cref="T:System.ArgumentException">array不是基元</exception>
+            <exception cref="T:System.ArgumentNullException">数组参数为null</exception>
+            <exception cref="T:System.OverflowException">array大于2GB</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">参数范围超出数组范围</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryRead(System.Array,System.Int32,System.Byte)">
+            <summary>
+            读取指定基元数组的位域
+            </summary>
+            <param name="array">数组</param>
+            <param name="byteBit">从索引0开始向后的字节偏移</param>
+            <param name="bit"><paramref name="byteBit"/>偏移下的位域位置，从0-7对应一个byte下的二进制bit位</param>
+            <returns>该位下的位域值，true表示1，false表示0</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">指定位域范围超过byte位数</exception>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.ArgumentNullException">数组参数为null</exception>
+            <exception cref="T:System.OverflowException">array大于2GB</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryRead(System.Byte[],System.Int32,System.Byte)">
+            <summary>
+            读取指定字节数组的位域
+            </summary>
+            <param name="bys">数组</param>
+            <param name="byteBit">从索引0开始向后的字节偏移</param>
+            <param name="bit"><paramref name="byteBit"/>偏移下的位域位置，从0-7对应一个byte下的二进制bit位</param>
+            <returns>该位下的位域值，true表示1，false表示0</returns>
+            <exception cref="T:System.ArgumentNullException">数组参数为null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">参数超过范围</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.BinaryWrite(System.Byte[],System.Int32,System.Byte,System.Boolean)">
+            <summary>
+            读取指定基元数组中的内存位域
+            </summary>
+            <param name="bys">字节数组</param>
+            <param name="byteBit">从索引0开始向后的字节偏移</param>
+            <param name="bit"><paramref name="byteBit"/>偏移下的位域位置，从0-7对应一个byte下的二进制bit位</param>
+            <param name="value">该位下写入的位域值，true表示1，false表示0</param>
+            <exception cref="T:System.ArgumentNullException">数组参数为null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">参数范围超出数组范围</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.ToByteArray(System.Collections.BitArray)">
+            <summary>
+            将位值压缩数组转化为byte数组，按位封装
+            </summary>
+            <param name="array">位值数组</param>
+            <returns>byte数组，与8bit对齐，多余bit忽略</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.RemoveChars(System.String,System.Char[])">
+            <summary>
+            删除字符串中所有指定的字符
+            </summary>
+            <param name="str">字符串</param>
+            <param name="cs">要删除的字符集合</param>
+            <returns>删除指定字符集合后的字符串；若字符串是一个null引用则返回null</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.OrignalDatas.Intercept(System.String,System.Int32,System.Int32)">
+            <summary>
+            截取字符串
+            </summary>
+            <param name="str">字符串</param>
+            <param name="index">起始索引</param>
+            <param name="count">截取的字符数量</param>
+            <returns>截取的字符串</returns>
+            <exception cref="T:System.ArgumentNullException">字符串为null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">索引截取范围超出字符串长度</exception>
+        </member>
+        <member name="T:Cheng.Stream.PairToByteStreams.DataOirgnal.Presets.SerializableToByteStream">
+            <summary>
+            <para>字节流转化器预设--可序列化对象转字节流方法</para>
+            <para>使可序列化的对象存入键值对集合<see cref="T:Cheng.Stream.PairToByteStreams.PairToByteStream"/>的方法</para>
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.Presets.SerializableToByteStream.#ctor(System.Runtime.Serialization.ISurrogateSelector,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            使用给定的序列化代理选择器初始化
+            </summary>
+            <param name="selector"></param>
+            <param name="context"></param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.Presets.SerializableToByteStream.#ctor">
+            <summary>
+            默认序列化格式
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.Presets.SerializableToByteStream.ToObj(System.Byte[])">
+            <summary>
+            将二进制数据反序列化读取对象
+            </summary>
+            <param name="byteStream">流的二进制数据</param>
+            <returns>反序列化的对象</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.DataOirgnal.Presets.SerializableToByteStream.ToByteStream(System.Object)">
+            <summary>
+            将对象序列化后的字节流创建字节数组
+            </summary>
+            <param name="obj">对象</param>
+            <returns>字节数组</returns>
+            <exception cref="T:System.ArgumentNullException">对象为null</exception>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">对象无法序列化</exception>
+            <exception cref="T:System.Security.SecurityException">调用方没有所需权限</exception>
+        </member>
+        <member name="T:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation">
+            <summary>
+            <para>文件操作扩展</para>
+            <para>该类封装了<see cref="T:System.IO.FileStream"/>类的文件操作方法，使其变得更加便利和简单</para>
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.FileReadAll(System.IO.Stream)">
+            <summary>
+            <para>读取文件流当前位置开始的所有字节流数据</para>
+            <para>该文件流必须拥有读取权限</para>
+            </summary>
+            <param name="file">文件流</param>
+            <returns>文件的所有数据</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.FileReadAll(System.IO.Stream,System.Int32)">
+            <summary>
+            读取流的所有数据，使用函数枚举器
+            </summary>
+            <param name="file">读取的流资源</param>
+            <param name="readSize">一次读取的字节大小</param>
+            <returns>一个函数枚举器，每次推进返回此次读取的数据</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.FileRead(System.IO.Stream,System.Int32)">
+            <summary>
+            读取文件流当前位置开始的数据，指定读取字节大小
+            </summary>
+            <param name="file">文件流</param>
+            <param name="size">字节大小</param>
+            <returns>实际读取到的字节流</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.FileWriteAll(System.IO.Stream,System.Byte[])">
+            <summary>
+            将字节流数据全部写入文件流
+            </summary>
+            <param name="file">文件流</param>
+            <param name="data">写入的字节流</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.FileExists(System.String)">
+            <summary>
+            <para>确认文件是否存在</para>
+            <para>若目录不存在，返回0</para>
+            <para>若存在目录，但不存在文件，返回1</para>
+            <para>若存在文件，返回2</para>
+            </summary>
+            <param name="path">判断的路径</param>
+            <returns>返回判断值</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.OpenFiles(System.String,System.IO.FileStream@)">
+            <summary>
+            <para>在指定目录使用读写权限打开已有文件</para>
+            <para>指定文件目录不存在，则返回false，参数<paramref name="file"/>设为null</para>
+            <para>当目录存在时，返回值为true；</para>
+            <para>只有指定文件存在目录当中，参数<paramref name="file"/>才会被实例化，否则为null</para>
+            </summary>
+            <param name="path">文件路径和名称；可使用绝对路径和相对路径。</param>
+            <param name="file">接收文件流的引用；如果为null，则文件不存在</param>
+            <returns>返回值为false时，指定目录不存在；true表示目录存在</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.OpenFiles(System.String,System.IO.FileStream@,System.IO.FileAccess)">
+            <summary>
+            <para>在指定目录打开已有文件,指定访问权限</para>
+            <para>该重载功能一致</para>
+            </summary>
+            <param name="path">文件路径和名称</param>
+            <param name="file">接收文件流的引用；如果为null，则文件不存在</param>
+            <param name="access">文件读写权限</param>
+            <returns>返回值为false时，指定目录不存在；true表示目录存在</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.CreatDirFiles(System.String,System.IO.FileStream@)">
+            <summary>
+            <para>在指定目录创建一个文件并使用读写权限打开</para>
+            </summary>
+            <param name="path">创建的文件所在目录</param>
+            <param name="file">创建文件后接收的文件流</param>
+            <returns>
+            <para>若不存在目录，则会创建目录和新的文件；返回0</para>
+            <para>若指定目录中不存在文件，则创建新文件，返回1</para>
+            <para>若指定目录存在文件，则会覆盖为新的空文件；并返回2</para>
+            </returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.CreatDirFiles(System.String,System.IO.FileStream@,System.IO.FileAccess)">
+            <summary>
+            <para>在指定目录创建一个文件并使用指定权限打开</para>
+            <para>自定义权限的重载函数</para>
+            </summary>
+            <param name="path">创建的文件所在目录</param>
+            <param name="file">创建文件后接收的文件流</param>
+            <param name="access">指定权限</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.CreatFiles(System.String,System.IO.FileStream@)">
+            <summary>
+            <para>在已有的路径下创建新的文件，并以读写权限打开</para>
+            <para>当参数<paramref name="file"/>被设为null值时，表示路径不存在</para>
+            <para>无论文件是否存在，都将创建或覆盖一个新的空文件打开</para>
+            </summary>
+            <param name="path">指定路径和文件名</param>
+            <param name="file">接收文件流的引用</param>
+            <returns>true表示旧文件被覆盖，false表示原本路径中没有文件</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.Extend.SmoothFileOperation.AppendFiles(System.String,System.Boolean)">
+            <summary>
+            <para>在指定目录使用可写权限追加文件信息，指定是否拥有读取权限</para>
+            <para>若给定目录不存在，返回null;</para>
+            <para>若给定目录下没有指定文件，则新建一个文件并返回流</para>
+            <para>若给定目录下存在指定文件，则打开文件并将指针标记到文件末尾</para>
+            <para>返回的实例默认拥有写入权限，可以手动追加读取权限</para>
+            </summary>
+            <param name="path">给定目录，可以为绝对目录和相对目录</param>
+            <param name="read">是否追加读取权限，默认为false</param>
+            <returns>打开的文件流，若目录不存在或无法打开则返回null</returns>
+        </member>
+        <member name="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">
+            <summary>
+            <para>键值对数据转化器所引发的异常</para>
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.PairToByteDataException.Email">
+            <summary>
+            联系邮箱
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.PairToByteDataException.bilibili">
+            <summary>
+            b站主页
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.PairToByteDataException.Github">
+            <summary>
+            GitHub
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteDataException.#ctor">
+            <summary>
+            初始化异常
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteDataException.#ctor(System.String)">
+            <summary>
+            使用指定消息初始化异常
+            </summary>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteDataException.#ctor(System.String,System.Exception)">
+            <summary>
+            使用消息和内部异常实例化
+            </summary>
+            <param name="message">消息</param>
+            <param name="excp">引发异常的异常</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteDataException.GetBaseException">
+            <summary>
+            重写根源函数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.PairToByteDataException.message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:Cheng.Stream.PairToByteStreams.PairToByteDataException.Message">
+            <summary>
+            异常信息
+            </summary>
+        </member>
+        <member name="P:Cheng.Stream.PairToByteStreams.PairToByteDataException.HelpLink">
+            <summary>
+            获取或设置求助链接
+            </summary>
+        </member>
+        <member name="T:Cheng.Stream.PairToByteStreams.DataType">
+            <summary>
+            <see cref="T:Cheng.Stream.PairToByteStreams.PairToByteStream"/>数据可存类型
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.DataType.Byte">
+            <summary>
+            一个字节
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.DataType.Bool">
+            <summary>
+            布尔值
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.DataType.Short">
+            <summary>
+            16位整形
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.DataType.Int">
+            <summary>
+            32位整形
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.DataType.Long">
+            <summary>
+            64位整形
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.DataType.Float">
+            <summary>
+            单精度浮点类型
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.DataType.Double">
+            <summary>
+            双精度浮点类型
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.DataType.Char">
+            <summary>
+            字符类型
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.DataType.String">
+            <summary>
+            字符串类型
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.DataType.ByteStream">
+            <summary>
+            字节数组byte[]
+            </summary>
+        </member>
+        <member name="T:Cheng.Stream.PairToByteStreams.PairToByteStream">
+            <summary>
+            <para>键值对数据流转化器</para>
+            <para>使用<see cref="T:System.String"/>作为键，可以添加任何数据的键值对集合；键的字符数量不能超过16383</para>
+            <para>该类封装了键值对<see cref="T:System.Collections.Generic.Dictionary`2"/>集合，可以将其转换为流数据</para>
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor(System.IO.Stream)">
+            <summary>
+            <para>使用指定流数据初始化</para>
+            <para>初始化后流的位置处于该数据末尾的后一位或结尾</para>
+            </summary>
+            <param name="stream">流数据</param>
+            <exception cref="T:System.ArgumentNullException">stream参数不能为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor(System.IO.Stream,System.Collections.Generic.IEqualityComparer{System.String})">
+            <summary>
+            <para>使用指定流数据和键比较器初始化</para>
+            <para>初始化后流的位置处于该数据末尾的后一位或结尾</para>
+            </summary>
+            <param name="stream">流数据</param>
+            <param name="comp">键比较器</param>
+            <exception cref="T:System.ArgumentNullException">stream参数不能为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor(System.String)">
+            <summary>
+            使用指定路径的文件初始化，若无法成功读取文件或文件不存在，则使用默认初始化
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor(System.Byte[])">
+            <summary>
+            使用转化完毕的字节流初始化键值对集合
+            </summary>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">在转化的过程中发生错误</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor(System.Boolean)">
+            <summary>
+            完全空构造
+            </summary>
+            <param name="ours">是否实例化键值对数据</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor">
+            <summary>
+            默认初始化键值对实例，实例元素为空
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor(System.Collections.Generic.IEqualityComparer{System.String})">
+            <summary>
+            <para>使用指定比较器初始化键值对</para>
+            </summary>
+            <param name="comp">比较器</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor(Cheng.Stream.PairToByteStreams.PairToByteStream)">
+            <summary>
+            <para>初始化并将另一个键值对集合数据拷贝到当前实例，使用默认比较器</para>
+            </summary>
+            <param name="dic">键值对集合</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor(Cheng.Stream.PairToByteStreams.PairToByteStream,System.Collections.Generic.IEqualityComparer{System.String})">
+            <summary>
+            <para>初始化键值对并将另一个键值对集合复制到当前实例，使用指定比较器</para>
+            </summary>
+            <param name="dic">键值对集合</param>
+            <param name="comparer">自定义键比较器</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor(System.Int32)">
+            <summary>
+            初始化元素为空的实例，指定初始容量大小
+            </summary>
+            <param name="capacity">包含元素数</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.#ctor(System.Int32,System.Collections.Generic.IEqualityComparer{System.String})">
+            <summary>
+            指定初始容量大小和自定义比较器
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.PairToByteStream.MemoryStorage">
+            <summary>
+            当前程序的存储方式
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.PairToByteStream.hash">
+            <summary>
+            内部键值对数据
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ToByteFenG(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            分割字节流数组
+            </summary>
+            <param name="arr">要分割的数组</param>
+            <param name="begin">起始下标</param>
+            <param name="size">字节长度</param>
+            <returns>分割后返回的数组</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ToPairByteStream(System.Byte[],System.Int32,System.String@,System.Object@,System.Byte@,System.Int32@)">
+            <summary>
+            字节流重新转化为一对键值
+            </summary>
+            <param name="data">转化的字节流</param>
+            <param name="beginIndex">从该下标开始向后读取</param>
+            <param name="key">转化后的键</param>
+            <param name="value">转化后的值</param>
+            <param name="fen">分隔符</param>
+            <param name="nowIndex">终止符后的下标；如果无法读取完整返回-1</param>
+            <returns>true代表可以完成读取，false表示数据不完整</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ToPairByteStream(System.IO.Stream,System.String@,System.Object@,System.Byte@)">
+            <summary>
+            文件字节流重新转化为一对键值，从当前位置开始读取一对数据
+            </summary>
+            <param name="file">转化的文件流</param>
+            <param name="key">转化后的键</param>
+            <param name="value">转化后的值</param>
+            <param name="fen">分隔符</param>
+            <returns>true代表可以完成读取，false表示数据不完整</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ToValueByType(System.Byte[],Cheng.Stream.PairToByteStreams.DataType)">
+            <summary>
+            反字节流转化，给定正确长度字节流和类型，返回相应的实例
+            </summary>
+            <param name="obj">数据</param>
+            <param name="type">类型</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ToSizeByType(Cheng.Stream.PairToByteStreams.DataType)">
+            <summary>
+            输入类型，返回大小；如果类型不可预估，返回0
+            </summary>
+            <returns>字节大小</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ValueWrite(System.Collections.Generic.List{System.Byte}@,Cheng.Stream.PairToByteStreams.DataType,System.Object@)">
+            <summary>
+            将类型和集合传入，根据类型向后写值
+            </summary>
+            <param name="list">待写集合</param>
+            <param name="type">类型</param>
+            <param name="value">转化写入的值</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.IsObjType(System.Object,System.Int32@)">
+            <summary>
+            判断值得类型和值字节大小
+            </summary>
+            <param name="obj">值</param>
+            <param name="size">大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.SetPairHand(System.Byte[])">
+            <summary>
+            读取并写入键值对数据开头；并返回值判断是否有数据
+            </summary>
+            <param name="byteStream">包含数据开头的字节流</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.SetPairHand(System.IO.Stream)">
+            <summary>
+            当前位置读取并写入键值对数据开头；并返回值判断是否有数据
+            </summary>
+            <param name="byteStream">包含数据开头的文件流</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">检测到数据异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.SetPairByStream(System.Byte[],System.Int32)">
+            <summary>
+            向键值对添加字节流转化数据，添加过程中遇到相等的键则忽略，对齐一个分隔符后端位置
+            </summary>
+            <param name="byteStream">数据</param>
+            <param name="index">从指定下标开始添加数据；</param>
+            <returns>如果数据完整并成功写入键值对集合，返回null；如果转化过程中遇见无法转化成一对的字节流，则返回当前确实数据的字节流</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.SetOnePairByStream(System.IO.Stream,System.Byte@)">
+            <summary>
+            添加一个键值对文件流转化数据，添加过程中遇到相等的键则忽略，对齐一个分隔符后端位置
+            <para>若无法添加，则文件流位置不变</para>
+            </summary>
+            <param name="file">文件流</param>
+            <param name="fen">当前数据后的分隔符</param>
+            <returns>是否添加成功</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.SetPairByStream(System.IO.Stream)">
+            <summary>
+            从当前位置的文件流读取数据，直到结束符；遇到同键不覆盖
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.SetPairByStreamOnCover(System.Byte[],System.Int32)">
+            <summary>
+            向键值对添加字节流转化数据，添加过程中遇到相等的键则覆盖前者数据，对齐一个分隔符后端位置
+            </summary>
+            <param name="byteStream">数据</param>
+            <param name="index">从指定下标开始添加数据；</param>
+            <returns>如果数据完整并成功写入键值对集合，返回null；如果转化过程中遇见无法转化成一对的字节流，则返回当前确实数据的字节流</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.SetOnePairByStreamOnCover(System.IO.Stream,System.Byte@)">
+            <summary>
+            从当前位置读取数据添加一个键值对，以覆盖形式添加
+            <para>无法添加完整数据时文件流指针不变</para>
+            </summary>
+            <param name="file">文件流</param>
+            <param name="fen">数据后的分隔符</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.m_replaceOnePair(System.IO.Stream,System.Byte@)">
+            <summary>
+            从当前位置读取一对键值，覆盖已有的键；若当前实例没有读取到的键，则不替换
+            </summary>
+            <param name="file"></param>
+            <param name="fen">分隔符</param>
+            <returns>成功</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.SetPairByStreamOnCover(System.IO.Stream)">
+            <summary>
+            从当前位置的文件流读取数据，直到结束符；同键覆盖
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.m_replacePair(System.IO.Stream)">
+            <summary>
+            从当前位置覆盖已有的键，知道结束符；若当前键内没有读取到的键，则不添加
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ReplaceStream(System.IO.Stream)">
+            <summary>
+            向键值对替换新数据
+            <para>从当前流位置开始读取数据；不会添加新数据，仅替换键名相同的数据</para>
+            </summary>
+            <param name="stream">流</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">转化时发生不可预估的错误</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取或写入权限</exception>
+            <exception cref="T:System.IO.IOException">IO错误</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取权限</exception>
+            <exception cref="T:System.ObjectDisposedException">流已关闭</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ReplaceStream(System.IO.Stream,System.Int32)">
+            <summary>
+            <para>向键值对集合替换新数据，使用迭代器累加</para>
+            <para>每次迭代添加<paramref name="count"/>对数据，功能同<see cref="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ReplaceStream(System.IO.Stream)"/></para>
+            </summary>
+            <param name="stream">要替换的流数据</param>
+            <param name="count">每返回一次迭代所需的添加数量</param>
+            <returns>迭代器</returns>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">迭代器在转化时发生不可预估的错误</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取或写入权限</exception>
+            <exception cref="T:System.IO.IOException">IO错误</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+            <exception cref="T:System.ObjectDisposedException">流已关闭</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.AddStream(System.Byte[])">
+            <summary>
+            <para>向键值对集合添加新数据</para>
+            <para>该函数不会破坏该实例原有的数据，只会在该实例的基础上增加新数据；<br/>
+            若字节流中出现与当前实例相同的键，则保留原有的值</para>
+            <para>请确保添加的数据是由该类转化而成的字节流</para>
+            </summary>
+            <param name="stream">要添加的字节流</param>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.AddStream(System.IO.Stream)">
+            <summary>
+            <para>向键值对集合添加新数据</para>
+            <para>该函数不会破坏该实例原有的数据，只会在该实例的基础上增加新数据；<br/>
+            若字节流中出现与当前实例相同的键，则保留原有的值</para>
+            <para>请确保添加的文件是由该类写入的</para>
+            <para>添加完毕后文件流位置会在该数据末尾的后一位</para>
+            </summary>
+            <param name="stream">要添加的文件流</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">转化时发生不可预估的错误</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取或写入权限</exception>
+            <exception cref="T:System.IO.IOException">IO错误</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+            <exception cref="T:System.ObjectDisposedException">流已关闭</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.AddStream(System.IO.Stream,System.Int32)">
+            <summary>
+            <para>向键值对集合添加新数据，使用迭代器累加</para>
+            <para>每次迭代添加<paramref name="count"/>对数据，功能同<see cref="M:Cheng.Stream.PairToByteStreams.PairToByteStream.AddStream(System.IO.Stream)"/></para>
+            </summary>
+            <param name="stream">要添加的流数据</param>
+            <param name="count">每返回一次迭代所需的添加数量</param>
+            <returns>迭代器</returns>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">迭代器转化时发生不可预估的错误</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取或写入权限</exception>
+            <exception cref="T:System.IO.IOException">IO错误</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+            <exception cref="T:System.ObjectDisposedException">流已关闭</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.CoverStream(System.Byte[])">
+            <summary>
+            <para>使用新的字节流数据覆盖原数据</para>
+            <para>该函数将字节流作为新的数据，以覆盖的形加入该实例；<br/>
+            若字节流数据存在与当前实例相同的键，则将对应的值覆盖；否则添加为新值</para>
+            <para>请确保添加的数据是由该类转化而成的字节流</para>
+            </summary>
+            <param name="stream">待覆盖的新字节流数据</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">转化时发生不可预估的错误</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.CoverStream(System.IO.Stream)">
+            <summary>
+            <para>使用新的文件数据覆盖原数据</para>
+            <para>该函数将文件作为新的数据，以覆盖的形加入该实例；<br/>
+            若文件存在与当前实例相同的键，则将对应的值覆盖；否则添加为新值</para>
+            <para>请确保添加的数据是由该类转化而成的字节流</para>
+            <para>添加完毕后文件流位置会在该数据末尾的后一位</para>
+            </summary>
+            <param name="stream">待覆盖的新字节流数据</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">转化时发生不可预估的错误</exception>
+            <exception cref="T:System.IO.IOException">IO错误</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取和写入权限</exception>
+            <exception cref="T:System.ObjectDisposedException">流已关闭</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.CoverStream(System.IO.Stream,System.Int32)">
+            <summary>
+            迭代器覆盖添加数据，每次迭代添加<paramref name="count"/>对数据
+            <para>功能同<see cref="M:Cheng.Stream.PairToByteStreams.PairToByteStream.CoverStream(System.IO.Stream)"/></para>
+            </summary>
+            <param name="file">文件流</param>
+            <param name="count">返回一次迭代的添加数量</param>
+            <returns>函数迭代器</returns>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">转化时发生不可预估的错误</exception>
+            <exception cref="T:System.IO.IOException">IO错误</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取和写入权限</exception>
+            <exception cref="T:System.ObjectDisposedException">流已关闭</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ToByteStream">
+            <summary>
+            将当前的键值对集合全部转化为字节流数据
+            </summary>
+            <returns>当前键值对集合的所有数据</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ToByteStream(System.Int32)">
+            <summary>
+            <para>将当前的键值对集合转化为字节流数据</para>
+            <para>使用枚举函数器，指定每次返回的最少字节数量；</para>
+            </summary>
+            <param name="bytes">每次返回的最少字节流</param>
+            <returns>每次返回指定字节长度的数据</returns>
+            <exception cref="T:System.InvalidOperationException">在转换的途中修改了键值对数据</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ReadStream(System.Byte[])">
+            <summary>
+            <para>使用新的数据覆盖当前键值对集合</para>
+            <para>该函数将完全清空当前键值对集合内的所有数据，并使用新的字节流重新初始化该实例</para>
+            </summary>
+            <param name="stream">新的数据</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">转化时发生错误</exception>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.PairToByteStream.keyMaxSize">
+            <summary>
+            键值对数据中的每一个键，其中的字符数不得超过该值
+            </summary>
+        </member>
+        <member name="P:Cheng.Stream.PairToByteStreams.PairToByteStream.dictionary">
+            <summary>
+            <para>返回表示当前键值对数据的<see cref="T:System.Collections.Generic.Dictionary`2"/>新实例</para>
+            </summary>
+        </member>
+        <member name="P:Cheng.Stream.PairToByteStreams.PairToByteStream.NewPairToByteData">
+            <summary>
+            返回完全相同数据的新实例
+            </summary>
+        </member>
+        <member name="P:Cheng.Stream.PairToByteStreams.PairToByteStream.Keys">
+            <summary>
+            所有键的集合
+            </summary>
+        </member>
+        <member name="P:Cheng.Stream.PairToByteStreams.PairToByteStream.Values">
+            <summary>
+            所有值的集合
+            </summary>
+        </member>
+        <member name="P:Cheng.Stream.PairToByteStreams.PairToByteStream.Count">
+            <summary>
+            <para>集合当中的键值对数量</para>
+            </summary>
+        </member>
+        <member name="P:Cheng.Stream.PairToByteStreams.PairToByteStream.Comparer">
+            <summary>
+            获取用于确定键是否相等的比较器<see cref="T:System.Collections.Generic.IEqualityComparer`1"/>
+            </summary>
+        </member>
+        <member name="P:Cheng.Stream.PairToByteStreams.PairToByteStream.Item(System.String)">
+            <summary>
+            通过键设置或访问值
+            </summary>
+            <returns>键所对应的值</returns>
+            <value>值必须是<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举列表内的类型</value>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">无法设置<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举类型列表之外的类型</exception>
+            <exception cref="T:System.ArgumentNullException">将值设置为null引用或<paramref name="key"/>为null</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">使用了不存在的键</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.IsDataType(System.Object)">
+            <summary>
+            参数类型是否可存
+            </summary>
+            <param name="obj">参数</param>
+            <returns>true表示该参数是基础可存类型，false表示不是基础可存类型；如果obj为null，也将返回false，因为值不支持null值</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.TryGetValue(System.String,System.Object@)">
+            <summary>
+            获取指定键所在的值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">获取的值引用</param>
+            <returns>获取到返回true；若无法找到key则返回false</returns>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.Object)">
+            <summary>
+            添加一对数据，数据类型必须是<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举其中之一
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">值</param>
+            <returns>是否添加成功，若数据<paramref name="obj"/>不是<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举之一，则不做添加并返回false</returns>
+            <exception cref="T:System.ArgumentNullException">键或值为Null</exception>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">键的字符数不得大于2048</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add``1(System.String,``0)">
+            <summary>
+            添加非托管类型对象，使用封送内存块转化字节数组
+            </summary>
+            <typeparam name="Value">指定非托管类型</typeparam>
+            <param name="key">键</param>
+            <param name="obj">值</param>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add``1(System.String,``0,Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream{``0})">
+            <summary>
+            <para>添加自定义对象，使用自定义字节流转换器</para>
+            </summary>
+            <typeparam name="Value">对象类型</typeparam>
+            <param name="key">键</param>
+            <param name="obj">值</param>
+            <param name="tobyte">字节流转换器</param>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+            <exception cref="T:System.ArgumentNullException">引用类型为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">字节流转化器出现异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream)">
+            <summary>
+            <para>添加自定义对象，派生自字节流转化器</para>
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">派生自<see cref="T:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream"/>接口的对象</param>
+            <exception cref="T:System.ArgumentNullException">参数为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">转化器异常</exception>
+            <exception cref="T:System.ArgumentException">键已存在</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.AddValue``1(System.String,``0)">
+            <summary>
+            <para>添加自定义对象，派生自字节流转化器</para>
+            </summary>
+            <typeparam name="Value">值类型派生对象</typeparam>
+            <param name="key">键</param>
+            <param name="obj">派生自<see cref="T:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream"/>接口的值类型对象</param>
+            <exception cref="T:System.ArgumentNullException">key为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">转化器异常</exception>
+            <exception cref="T:System.ArgumentException">键已存在</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,Cheng.Stream.PairToByteStreams.PairToByteStream)">
+            <summary>
+            添加一个键值对数据，转化为字节流储存
+            </summary>
+            <param name="key">键</param>
+            <param name="pair">值</param>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+            <exception cref="T:System.ArgumentNullException">引用类型为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(Cheng.Stream.PairToByteStreams.PairToByteStream)">
+            <summary>
+            <para>添加一个键值对集合</para>
+            <para>如果参数<paramref name="pair"/>中的键与当前实例相同，则不再添加这对键值</para>
+            </summary>
+            <param name="pair">另一个键值对数据</param>
+            <exception cref="T:System.ArgumentNullException">参数<paramref name="pair"/>未引用到指定实例</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.Byte[])">
+            <summary>
+            写入字节流
+            <para>函数<see cref="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add``1(System.String,``0)"/>和<see cref="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add``1(System.String,``0,Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream{``0})"/>储存的最终类型和该函数相同</para>
+            </summary>
+            <param name="key">键</param>
+            <param name="bys">字节流数组，该数组元素个数不得超过<see cref="F:System.Int32.MaxValue"/></param>
+            <exception cref="T:System.ArgumentNullException">键或值为Null</exception>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">字节流数据长度过大</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.Int32)">
+            <summary>
+            添加整型值
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">值</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">键的字符数不得大于2048</exception>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.Int64)">
+            <summary>
+            添加长整形
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">写入的值</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">键的字符数不得大于2048</exception>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.Byte)">
+            <summary>
+            添加字节数据
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">写入的值</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">键的字符数不得大于2048</exception>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.Int16)">
+            <summary>
+            添加短整型
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">写入的值</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">键的字符数不得大于2048</exception>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.Single)">
+            <summary>
+            添加浮点型
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">写入的值</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">键的字符数不得大于2048</exception>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.Double)">
+            <summary>
+            添加双浮点
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">写入的值</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">键的字符数不得大于2048</exception>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.Boolean)">
+            <summary>
+            添加布尔值
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">写入的值</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">键的字符数不得大于2048</exception>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.Char)">
+            <summary>
+            添加字符类型
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">写入的值</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">键的字符数不得大于2048</exception>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Add(System.String,System.String)">
+            <summary>
+            添加字符串
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">写入的值</param>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">键的字符数不得大于2048</exception>
+            <exception cref="T:System.ArgumentNullException">键和参数不能为Null</exception>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Clear">
+            <summary>
+            移除当前实例内所有数据
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Remove(System.String)">
+            <summary>
+            <para>移除一对指定的键值</para>
+            </summary>
+            <param name="key">指定键</param>
+            <returns>true表示移除成功；false表示不存在指定键，无法移除</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.RemoveList(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            移除指定键集合所对应的所有值，如果集合内的键没有包含在键值对集合中，则跳过
+            </summary>
+            <param name="keys">键的集合</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="keys"/>为null或其中有元素为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.RemoveList(System.String[])">
+            <summary>
+            移除指定键数组所对应的所有值，如果数组内的键没有包含在键值对集合中，则跳过
+            </summary>
+            <param name="keys">键的集合</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="keys"/>为null或有元素为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.AtStruck``1(System.String)">
+            <summary>
+            使用非托管类型读取字节流数据
+            </summary>
+            <typeparam name="Value">读取的封装类型</typeparam>
+            <param name="key">指定的键</param>
+            <returns>键所对应的值</returns>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.ArgumentException">字节数组与读取类型大小不匹配</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.At``1(System.String,Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream{``0})">
+            <summary>
+            <para>读取自定义类型对象，使用字节流转化器</para>
+            </summary>
+            <typeparam name="Value">值类型</typeparam>
+            <param name="key">键</param>
+            <param name="tobyte">字节流转化器</param>
+            <returns>值</returns>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>或<paramref name="tobyte"/>为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">字节流转化器出现异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.At``1(System.String,``0@,Cheng.Stream.PairToByteStreams.DataOirgnal.IReferenceTypeToByteStream{``0})">
+            <summary>
+            使用已有的引用类型读取自定义对象
+            </summary>
+            <typeparam name="Ref">指定引用的类型</typeparam>
+            <param name="key">键</param>
+            <param name="obj">用于接收数据的对象</param>
+            <param name="tobyte">字节流转化器</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">字节流转化器出现异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.AtValue``1(System.String,``0@)">
+            <summary>
+            使用已有的对象读取对象
+            </summary>
+            <typeparam name="Ref">派生自<see cref="T:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream"/>接口的对象</typeparam>
+            <param name="key">键</param>
+            <param name="obj">读取数据的对象引用</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">字节流转化器出现异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.AtPair(System.String)">
+            <summary>
+            读取字节流数据并将其转化为键值对数据
+            </summary>
+            <param name="key">键</param>
+            <returns>使用字节流实例化的键值对数据</returns>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时发生错误</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ByteStream(System.String)">
+            <summary>
+            读取并拆箱为字节数组
+            </summary>
+            <param name="key">键</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ContainsKey(System.String)">
+            <summary>
+            判断指定键是否存在于集合中
+            </summary>
+            <param name="key">键</param>
+            <returns>存在true，否则false</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.At(System.String)">
+            <summary>
+            使用键访问值
+            </summary>
+            <param name="key">键</param>
+            <returns>键所对应的值，若指定键不存在，则返回null</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.At``1(System.String)">
+            <summary>
+            使用键访问值并拆箱
+            </summary>
+            <typeparam name="Value">要读取的数据类型</typeparam>
+            <param name="key">键</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.At``1(System.String,``0@)">
+            <summary>
+            读取并拆箱为指定类型
+            </summary>
+            <typeparam name="Value">要读取的类型</typeparam>
+            <param name="key">键</param>
+            <param name="value">接收值的对象</param>
+            <returns>若指定键存在，则将值赋值给<paramref name="value"/>参数，并返回true；否则将值赋值为默认值，并返回false</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>等于null</exception>
+            <exception cref="T:System.InvalidCastException">该键所对应的值无法转换为指定类型<typeparamref name="Value"/></exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.At``1(System.String,System.Boolean@,``0@)">
+            <summary>
+            读取并拆箱为指定类型
+            </summary>
+            <typeparam name="Value">要读取的类型</typeparam>
+            <param name="key">键</param>
+            <param name="invalidExc">在读取并将值拆箱的过程中是否引发了<see cref="T:System.InvalidCastException"/>异常</param>
+            <param name="value">接收值的对象</param>
+            <returns>
+            <para>若指定键存在，则将值拆箱给<paramref name="value"/>参数，并返回true；</para>
+            <para>若指定键不存在，则将参数<paramref name="value"/>赋默认值，返回false</para>
+            <para>若在拆箱的过程中出现<see cref="T:System.InvalidCastException"/>异常，则将参数<paramref name="value"/>赋默认值，并返回true</para>
+            </returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Int(System.String)">
+            <summary>
+            读取并拆箱为整形
+            </summary>
+            <param name="key">键</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Float(System.String)">
+            <summary>
+            读取并拆箱为浮点型
+            </summary>
+            <param name="key">键</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Double(System.String)">
+            <summary>
+            读取并拆箱为双浮点
+            </summary>
+            <param name="key">键</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Long(System.String)">
+            <summary>
+            读取并拆箱为长整形
+            </summary>
+            <param name="key">键</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Byte(System.String)">
+            <summary>
+            读取并拆箱为字节类型数据
+            </summary>
+            <param name="key">键</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.String(System.String)">
+            <summary>
+            读取并拆箱为字符串数据
+            </summary>
+            <param name="key">键</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Boolen(System.String)">
+            <summary>
+            读取并拆箱为布尔类型
+            </summary>
+            <param name="key">键</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Short(System.String)">
+            <summary>
+            读取并拆箱为短整型
+            </summary>
+            <param name="key">键</param>
+            <exception cref="T:System.InvalidCastException">无效的拆箱行为</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.IsTypeData(System.String)">
+            <summary>
+            获取指定键对应值的对象类型
+            </summary>
+            <param name="key">键</param>
+            <returns>指定对象类型</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">无效的<paramref name="key"/>参数</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">存入了非指定的数据</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.IsType(System.Object)">
+            <summary>
+            判断数据的类型
+            </summary>
+            <param name="obj">判断的参数</param>
+            <returns>该参数的可存类型；如果参数类型不是任何<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举中的类型，则默认返回<see cref="F:Cheng.Stream.PairToByteStreams.DataType.ByteStream"/></returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.IsType(System.Object,Cheng.Stream.PairToByteStreams.DataType@)">
+            <summary>
+            判断数据的类型
+            </summary>
+            <param name="obj">判断的参数</param>
+            <param name="dataType">接收返回的可存类型枚举引用；如果参数类型不是<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举中的类型，则默认返回<see cref="F:Cheng.Stream.PairToByteStreams.DataType.ByteStream"/></param>
+            <returns>参数<paramref name="obj"/>是否为<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举中的基础可存类型，如果是其中之一，返回true；否则false；如果为null，返回false</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.IsType``1(``0,Cheng.Stream.PairToByteStreams.DataType@)">
+            <summary>
+            判断数据的类型
+            </summary>
+            <typeparam name="T">泛型类型</typeparam>
+            <param name="obj">判断的参数</param>
+            <param name="dataType">接收返回的可存类型枚举引用；如果参数类型不是<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举中的类型，则默认返回<see cref="F:Cheng.Stream.PairToByteStreams.DataType.ByteStream"/></param>
+            <returns>参数<paramref name="obj"/>是否为<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举中的基础可存类型，如果是其中之一，返回true；否则false</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.IsType(System.Type,Cheng.Stream.PairToByteStreams.DataType@)">
+            <summary>
+            判断数据的类型
+            </summary>
+            <param name="type">要判断的类型</param>
+            <param name="dataType">接收返回的可存类型枚举引用；如果参数类型不是<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举中的类型，则默认返回<see cref="F:Cheng.Stream.PairToByteStreams.DataType.ByteStream"/></param>
+            <returns>类型<paramref name="type"/>是否为<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举中的基础可存类型，如果是其中之一，返回true；否则false</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.IsType``1(Cheng.Stream.PairToByteStreams.DataType@)">
+            <summary>
+            判断数据的类型
+            </summary>
+            <typeparam name="CType">要判断的类型</typeparam>
+            <param name="dataType">接收返回的可存类型枚举引用；如果参数类型不是<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举中的类型，则默认返回<see cref="F:Cheng.Stream.PairToByteStreams.DataType.ByteStream"/></param>
+            <returns>类型<typeparamref name="CType"/>是否为<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举中的基础可存类型，如果是其中之一，返回true；否则false</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ValueEquals(System.Object,System.Object)">
+            <summary>
+            比较两个可存类型的值是否一致
+            </summary>
+            <param name="obj1">封装对象1</param>
+            <param name="obj2">封装对象2</param>
+            <returns>
+            <para>参数<paramref name="obj1"/>和<paramref name="obj2"/>的对象类型必须为<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举指定的类型；</para>
+            <para>若两个对象类型不同，则返回false；若类型相同，但值不同，返回false；只有类型和值相同时，返回true</para>
+            </returns>
+            <exception cref="T:System.ArgumentException">对象为<see cref="T:Cheng.Stream.PairToByteStreams.DataType"/>枚举指定之外的类型</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set``1(System.String,``0)">
+            <summary>
+            重新设置或添加指定键的值，使用封送内存块转化字节数组
+            </summary>
+            <typeparam name="Value">指定的类型</typeparam>
+            <param name="key">修改或添加的键</param>
+            <param name="value">修改的值</param>
+            <exception cref="T:System.ArgumentException"><typeparamref name="Value"/>不是连续内存块的可格式化类型</exception>
+            <exception cref="T:System.ArgumentException">指定键已存在</exception>
+            <exception cref="T:System.ArgumentNullException">键为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set``1(System.String,``0,Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream{``0})">
+            <summary>
+            重新设置或添加指定键的值，使用字节流转换器
+            </summary>
+            <typeparam name="Value"></typeparam>
+            <param name="key">需要更改或添加的键</param>
+            <param name="value">值</param>
+            <param name="toByte">指定字节流转化器</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null或<paramref name="toByte"/>为null；或者实现的转化器返回的是一个null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">字节流转化器出现异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream)">
+            <summary>
+            重新设置或添加指定键的值，使用公共接口字节流转换器
+            </summary>
+            <param name="key">需要更改或添加的键</param>
+            <param name="value">派生自<see cref="T:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream"/>接口的对象</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null或参数为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">字节流转化器出现异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.SetValue``1(System.String,``0)">
+            <summary>
+            重新设置或添加指定键的值，使用公共接口字节流转换器
+            </summary>
+            <typeparam name="Value">派生自<see cref="T:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream"/>接口的值类型</typeparam>
+            <param name="key">需要更改或添加的键</param>
+            <param name="value">派生自<see cref="T:Cheng.Stream.PairToByteStreams.DataOirgnal.IObjToByteStream"/>接口的值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null或参数为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">字节流转化器出现异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,Cheng.Stream.PairToByteStreams.PairToByteStream)">
+            <summary>
+            重新设置或添加指定键的值
+            </summary>
+            <param name="key">键</param>
+            <param name="pair">值，转化为字节流数据储存</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null或<paramref name="pair"/>为null</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">转化时发生错误</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">字节流转化器出现异常</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,System.Int32)">
+            <summary>
+            添加或重新设置为指定值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">指定值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,System.Int64)">
+            <summary>
+            添加或重新设置为指定值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">指定值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,System.Int16)">
+            <summary>
+            添加或重新设置为指定值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">指定值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,System.Byte)">
+            <summary>
+            添加或重新设置为指定值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">指定值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,System.Char)">
+            <summary>
+            添加或重新设置为指定值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">指定值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,System.String)">
+            <summary>
+            添加或重新设置为指定值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">指定值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null或<paramref name="value"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,System.Single)">
+            <summary>
+            添加或重新设置为指定值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">指定值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,System.Double)">
+            <summary>
+            添加或重新设置为指定值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">指定值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,System.Boolean)">
+            <summary>
+            添加或重新设置为指定值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">指定值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Set(System.String,System.Byte[])">
+            <summary>
+            添加或重新设置为指定值
+            </summary>
+            <param name="key">键</param>
+            <param name="value">指定值</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/>为null或<paramref name="value"/>为null</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.FileWrite(System.IO.Stream)">
+            <summary>
+            <para>将键值对集合数据从流数据当前位置向后写入</para>
+            </summary>
+            <param name="stream">要写入的文件流，需要读写权限</param>
+            <returns>对文件流写入的数据大小，单位字节</returns>
+            <exception cref="T:System.ArgumentNullException">file参数不能为null</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取或写入权限</exception>
+            <exception cref="T:System.ArgumentException">流缓冲区无法承载一次传输的字节量</exception>
+            <exception cref="T:System.IO.IOException">流错误</exception>
+            <exception cref="T:System.ObjectDisposedException">流是关闭状态</exception>
+            <exception cref="T:System.InvalidOperationException">在写入的过程中修改键值对数据</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.FileWrite(System.IO.Stream,System.Int32)">
+            <summary>
+            <para>使用函数枚举器，将键值对集合数据从流的当前位置向后写入</para>
+            </summary>
+            <param name="stream">要写入的文件流，需要写入权限</param>
+            <param name="maxWriteByte">每次写入的最大字节数</param>
+            <returns>将数据写入的函数枚举器，期间返回每次写入的字节；写入期间请不要将<paramref name="stream"/>引用的实例释放</returns>
+            <exception cref="T:System.ArgumentNullException">file参数不能为null</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取或写入权限</exception>
+            <exception cref="T:System.ArgumentException">流缓冲区无法承载一次传输的字节量</exception>
+            <exception cref="T:System.IO.IOException">流错误</exception>
+            <exception cref="T:System.ObjectDisposedException">流是关闭状态</exception>
+            <exception cref="T:System.InvalidOperationException">在写入的过程中修改键值对数据</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.FileRead(System.IO.Stream)">
+            <summary>
+            <para>读取流从当前位置开始的数据到键值对集合</para>
+            <para><paramref name="stream"/>必须要有读取权限</para>
+            <para>该函数将会对当前实例的旧值清空</para>
+            <para>请确保指定文件是该类数据转化，否则可能会引发未知异常</para>
+            </summary>
+            <param name="stream">给定文件路径</param>
+            <exception cref="T:System.ArgumentException">缓冲区长度不足以承载一次传输的量</exception>
+            <exception cref="T:System.ArgumentNullException">file参数不能为null</exception>
+            <exception cref="T:System.IO.IOException">IO错误</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取权限</exception>
+            <exception cref="T:System.ObjectDisposedException">流已关闭</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.FileReadOnCover(System.IO.Stream)">
+            <summary>
+            <para>读取流数据并将数据添加到键值对集合</para>
+            <para>若在流数据中发现了与该实例相同的键，则覆盖为新值</para>
+            <para>请确保指定文件是该类数据转化</para>
+            </summary>
+            <exception cref="T:System.ArgumentException">缓冲区长度不足以承载一次传输的量</exception>
+            <exception cref="T:System.ArgumentNullException">file参数不能为null</exception>
+            <exception cref="T:System.IO.IOException">IO错误</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取权限</exception>
+            <exception cref="T:System.ObjectDisposedException">流已关闭</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.FileReadAdd(System.IO.Stream)">
+            <summary>
+            <para>读取流数据并将数据添加键值对集合</para>
+            <para>若在流数据中发现了与该实例相同的键，则保留旧值</para>
+            <para>请确保指定文件是该类数据转化</para>
+            </summary>
+            <exception cref="T:System.ArgumentException">缓冲区长度不足以承载一次传输的量</exception>
+            <exception cref="T:System.ArgumentNullException">file参数不能为null</exception>
+            <exception cref="T:System.IO.IOException">IO错误</exception>
+            <exception cref="T:Cheng.Stream.PairToByteStreams.PairToByteDataException">读取时检测到数据异常</exception>
+            <exception cref="T:System.NotSupportedException">流没有读取权限</exception>
+            <exception cref="T:System.ObjectDisposedException">流已关闭</exception>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.FileWrite(System.String)">
+            <summary>
+            将当前集合数据写入在指定路径新建的文件当中
+            </summary>
+            <param name="filePath">文件所在路径，使用绝对路径或相对路径</param>
+            <returns>如果成功写入返回true；如果无法写入或指定路径格式不正确，或者引发其它任何异常，返回false</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.GetEnumerator">
+            <summary>
+            返回当前的循环访问的枚举器
+            </summary>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.ToString">
+            <summary>
+            当前实例储存个数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.KeyEquals(Cheng.Stream.PairToByteStreams.PairToByteStream,Cheng.Stream.PairToByteStreams.PairToByteStream)">
+            <summary>
+            对比两个数据的键是否相同
+            </summary>
+            <param name="p1">p1</param>
+            <param name="p2">p2</param>
+            <returns>若两参数的键是相同数量的相等字符串，无论顺序，返回true；否则false</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Equals(System.Object)">
+            <summary>
+            判断参数的键值对数据是否等于该实例的数据
+            </summary>
+            <param name="obj">参数</param>
+            <returns>若类型匹配且满足键值对数据比对条件返回true；否则返回false</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.Equals(Cheng.Stream.PairToByteStreams.PairToByteStream)">
+            <summary>
+            判断参数的键值对数据是否等于该实例的数据
+            </summary>
+            <param name="obj">参数</param>
+            <returns>若参数键值对数据的每一个键和值都能在当前实例中找到对应的键和值，且值得类型和数据相等，返回true；否则返回false</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream._equals(System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            对比两键值对键和值，无论顺序
+            参数必须引用实例
+            </summary>
+            <param name="p1"></param>
+            <param name="p2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.GetHashCode">
+            <summary>
+            获取字典的哈希代码
+            </summary>
+            <returns>字典的哈希代码</returns>
+        </member>
+        <member name="M:Cheng.Stream.PairToByteStreams.PairToByteStream.InitDictionaryPair(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}})">
+            <summary>
+            使用公开键值对枚举初始化键值对集合，自动筛选无法存储的类型
+            </summary>
+            <param name="dicPair">键值对集合</param>
+            <returns>基于<paramref name="dicPair"/>实例化的新实例</returns>
+            <exception cref="T:System.ArgumentNullException">参数为null</exception>
+        </member>
+        <member name="T:Cheng.Stream.PairToByteStreams.MemoryStorage">
+            <summary>
+            内存存储方式
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.MemoryStorage.Small">
+            <summary>
+            小端存储
+            </summary>
+        </member>
+        <member name="F:Cheng.Stream.PairToByteStreams.MemoryStorage.Large">
+            <summary>
+            大端存储
+            </summary>
+        </member>
+    </members>
+</doc>
